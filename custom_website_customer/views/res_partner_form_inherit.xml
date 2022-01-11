@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_inherit_customer_type" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.customer.type</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_address_format']" position="after">
+                    <field name="Customer_Type"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <template id="Add_Custom_Field_Signup" inherit_id="auth_signup.fields">
+            <xpath expr="//div[hasclass('field-confirm_password')]" position="after">
+                <label for="confirm_password">Customer Type</label>
+                <div class="customer_type_signup">
+                    <select class="selectpicker form-control" name="customer_type">
+                        <t t-foreach="website.get_customer_types()" t-as="type">
+                            <option t-att-value="type.id" t-esc="type.name"/>
+                        </t>
+                        <!--<option>Customer Type</option>
+                        <option>Wholesaler</option>
+                        <option>Retailer</option>
+                        <option>Consumer</option>-->
+                    </select>
+
+
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
+

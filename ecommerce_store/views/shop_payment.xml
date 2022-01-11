@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="product_checkout" name="checkout page" inherit_id="website_sale.cart" >
+        <xpath expr="//t[@t-call='website_sale.cart_lines']" position="before" groups="base.group_user">
+            <div class="offset-md-3 col-md-6" groups="base.group_user">
+                  <div class="form-group form-inline">
+                    <label for="select_customer">Order for:</label>
+                    <select name="select_customer" id="select_customer" style="width:100%;">
+                    </select>
+                  </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

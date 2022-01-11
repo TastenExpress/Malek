@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_log_scan_time,all.all.log.scan.time,model_barcode_scan_timings,,1,1,1,1
