@@ -18,9 +18,9 @@
                             <label class="ontrol-label col-sm-2">Choose Style</label>
                             <div class="col-sm-10">
                                 <input type="radio" class="s_website_form_input" value="style_3" name="style" checked="on"/>
-                                <label >Style 1</label><br></br>
+                                <label >List view</label><br></br>
                                 <input type="radio" class="s_website_form_input" value="style_5" name="style"/>
-                                <label >Style 2</label><br></br>
+                                <label >Card view</label><br></br>
                             </div>
 
                             <label class="ontrol-label col-sm-2">Select Pricelist</label>
