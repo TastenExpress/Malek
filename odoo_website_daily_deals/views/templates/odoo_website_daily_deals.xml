@@ -138,9 +138,9 @@
 								<label class="ontrol-label col-sm-2">Choose Style</label>
 								<div class="col-sm-10">
 									<input type="radio" class="s_website_form_input" value="style_3" name="style" checked="on"/>
-									<label >Style 1</label>
+									<label >List view</label>
 									<input type="radio" class="s_website_form_input" value="style_img" name="style"/>
-									<label >Style 2</label>
+									<label >Picture view</label>
 									<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 									<input type="hidden" class="s_website_form_input" t-att-value="offers.id" name="offer_id_get"/>
 									<button type="submit" class="btn btn-primary">Download</button>
