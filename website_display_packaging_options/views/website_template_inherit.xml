@@ -8,13 +8,13 @@
         <div class='wk_packaging'>
             <t t-if="product_variant.sudo().packaging_ids">
                 <h5>Select the desired product packages</h5>
-                <select class="form-control package_selector mb-3" name="attrib">
-                    <t t-foreach="product_variant.sudo().packaging_ids" t-as="package_id"  groups="base.group_user">
+                <select class="form-control package_selector mb-3" name="attrib">>
+                    <t t-foreach="product_variant.sudo().packaging_ids" t-as="package_id"  groups="base.group_public">
                         <option t-att-value="package_id.id" t-esc="package_id.name" t-att-data-pack-id='package_id.qty'/>
                     </t>
 
 
-                    <t t-foreach="product_variant.sudo().packaging_ids" t-as="package_id"  groups="base.group_public,base.group_portal">
+                    <t t-foreach="product_variant.sudo().packaging_ids" t-as="package_id"  groups="base.group_user,base.group_portal">
                         <t t-if="request.env.user.partner_id.Customer_Type.id in package_id.customer_type_ids.mapped('id')">
                             <option t-att-value="package_id.id" t-esc="package_id.name" t-att-data-pack-id='package_id.qty'/>
                         </t>
