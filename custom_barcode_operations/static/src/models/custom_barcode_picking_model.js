@@ -16,6 +16,8 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
         });
     },
 
+
+
     _getFieldToWrite() {
         return [
             'location_id',

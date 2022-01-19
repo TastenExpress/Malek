@@ -14,6 +14,7 @@
                 <button class="o_add_line btn btn-secondary text-uppercase">Total Packages Demanded = <t t-esc="tot_pkgs"/></button>
             </div>
         </xpath>
+
     </t>
 
 </templates>
