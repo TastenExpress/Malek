@@ -6,6 +6,8 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <h6>Is Barcode Operations Admin?</h6>
+                <h3><field name="is_admin" /></h3>
                 <h6>Barcode Password</h6>
                 <h3><field name="barcode_pass" password="True"  placeholder="Enter Barcode password" required="1" style="width:55%;"/></h3>
             </xpath>
