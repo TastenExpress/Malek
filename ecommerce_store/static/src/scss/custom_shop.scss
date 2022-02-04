@@ -8,8 +8,18 @@ a.text-primary.text-decoration-none {
     text-align: center;
 }
 
-#o_shop_collapse_category{
-    i:nth-child(3){
-        display:none;
+.js_sale .oe_website_sale #products_grid .o_wsale_product_information_text .product_price.mb-1 .oe_currency_value{
+
+    font-weight:bold;
+}
+
+#wsale_products_categories_collapse{
+    ul{
+        li{
+            i:nth-child(2){
+                display:none;
+            }
+        }
     }
+
 }
