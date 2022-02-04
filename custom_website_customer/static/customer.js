@@ -41,14 +41,12 @@ $(document).ready(function(){
 
             text_ship.style.display = "none";
             $('#shipping_name').removeAttr('required');
-            $('#shipping_email').removeAttr('required');
             $('#shipping_phone').removeAttr('required');
             $('#shipping_address').removeAttr('required');
         }
         else {
             text_ship.style.display = "block";
             $('#shipping_name').prop('required',true);
-            $('#shipping_email').prop('required',true);
             $('#shipping_phone').prop('required',true);
             $('#shipping_address').prop('required',true);
         }

@@ -6,8 +6,7 @@
             <div class="offset-md-3 col-md-6" groups="base.group_user">
                   <div class="form-group form-inline">
                     <label for="select_customer">Order for:</label>
-                    <select name="select_customer" id="select_customer" style="width:100%;">
-                    </select>
+                    <input list="select_customers" name="select_customer" id="select_customer" style="width:100%;"/>
                   </div>
             </div>
         </xpath>

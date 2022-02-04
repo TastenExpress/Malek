@@ -8,6 +8,7 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     selector: '.oe_website_sale',
     events: {
         'change #select_customer': 'onChangeCustomer',
+        'keyup #select_customer': 'getcustomers'
     },
     start: function () {
         var def = this._super.apply(this, arguments);
@@ -16,23 +17,41 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     },
     getcustomers: function (ev) {
 		var self= this;
-
+        var search_string = $('#select_customer').val();
+//        alert(search_string);
+//        if(!search_string) return;
         this._rpc({
             route: "/getcustomers",
-        }).then(function (data) {
-        console.log('dataaaaaa',data);
-            var options = "<option id=0>Select Customer</option>";
+            params: {
+                search: search_string,
+            },
+        }).then(function(data) {
+            var data_list= "<datalist id='select_customers'>";
+            //$('#select_customer').html(data);
+            var options = ""
             for (let i = 0; i < data.length; i++) {
-                options += "<option id="+data[i]['id']+">"+data[i]['name']+"</option>";
+                options += "<option data-id="+data[i]['id']+">"+data[i]['name']+"</option>";
+            };
+            var existing_data_list = $('#select_customers').html();
+            console.log("existing_data_list",existing_data_list);
+            if(!existing_data_list){
+                data_list+='"'+options+'"'+"</datalist>";
+                $('#select_customer').append(data_list);
             }
-            $('#select_customer').html(options).select2();
+//            else{
+//                existing_data_list.html(options);
+//            }
         });
     },
 
     onChangeCustomer:function(ev){
-        var customer_id = $('option:selected', '#select_customer').attr('id');
-        $.blockUI();
 
+        var customer_name = $('#select_customer').val();
+        var customer_id = $('#select_customers option').filter(function() {
+            return this.value == customer_name;
+        }).data('id');
+        if(!customer_id) return;
+        $.blockUI();
         this._rpc({
             route: "/update_order_customer",
             params: {
