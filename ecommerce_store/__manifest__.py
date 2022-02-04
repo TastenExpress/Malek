@@ -21,7 +21,7 @@
     'assets': {
         'web.assets_frontend': [
             'ecommerce_store/static/src/js/checkout_customers.js',
-            'ecommerce_store/static/src/scss/custom_shop.scss'
+            'ecommerce_store/static/src/scss/custom_shop.scss',
             "ecommerce_store/static/src/css/custom.css",
             'ecommerce_store/static/src/js/checkout_customers.js'
         ],
