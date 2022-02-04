@@ -7,3 +7,9 @@ a.text-primary.text-decoration-none {
 .js_sale .oe_website_sale #products_grid .o_wsale_product_information_text .product_price.mb-1 {
     text-align: center;
 }
+
+#o_shop_collapse_category{
+    i:nth-child(3){
+        display:none;
+    }
+}
