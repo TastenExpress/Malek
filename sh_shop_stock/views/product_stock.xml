@@ -44,7 +44,7 @@
                     <ol>
                         <li style="font-size:13px;">SKU: <span t-esc="product.sudo().default_code"></span></li>
                         <li style="font-size:13px;">Barcode: <span t-esc="product.sudo().barcode"></span></li>
-                        <li style="font-size:13px;">Case Barcode: <span t-esc="product.sudo().upc"></span></li>
+                        <li style="font-size:13px;">Case Barcode: <t t-foreach="product.sudo().packaging_ids" t-as="package"><span t-esc="package.barcode"></span></t></li>
 			<li style="font-size:13px;">Label: <span t-esc="product.sudo().bilingual_frenchlabel"></span></li>
                         <li style="font-size:13px;">Expiry: <t t-if="product.sudo().expiry_lot_date"><span t-esc="product.sudo().expiry_lot_date" ></span></t><t t-else="">N/A</t></li>
                         <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
@@ -74,7 +74,7 @@
                     <ol>
                         <li style="font-size:13px;">SKU: <span t-esc="product.sudo().default_code"></span></li>
                         <li style="font-size:13px;">Barcode: <span t-esc="product.sudo().barcode"></span></li>
-                        <li style="font-size:13px;">Case Barcode: <span t-esc="product.sudo().upc"></span></li>
+                        <li style="font-size:13px;">Case Barcode: <t t-foreach="product.sudo().packaging_ids" t-as="package"><span t-esc="package.barcode"></span></t></li>
 			<li style="font-size:13px;">Label: <span t-esc="product.sudo().bilingual_frenchlabel"></span></li>
                         <li style="font-size:13px;">Expiry: <t t-if="product.sudo().expiry_lot_date"><span t-esc="product.sudo().expiry_lot_date" ></span></t><t t-else="">N/A</t></li>
                         <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
