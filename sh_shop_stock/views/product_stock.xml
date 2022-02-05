@@ -44,30 +44,29 @@
                     <ol>
                         <li style="font-size:13px;">SKU: <span t-esc="product.sudo().default_code"></span></li>
                         <li style="font-size:13px;">Barcode: <span t-esc="product.sudo().barcode"></span></li>
-                        <li style="font-size:13px;">UPC: <span t-esc="product.sudo().upc"></span></li>
+                        <li style="font-size:13px;">Case Barcode: <t t-foreach="product.sudo().packaging_ids" t-as="package"><span t-esc="package.barcode"></span></t></li>
 			<li style="font-size:13px;">Label: <span t-esc="product.sudo().bilingual_frenchlabel"></span></li>
-                        <t t-if="product.sudo().expiry_lot_date"><li style="font-size:13px;">Expiry: <span t-esc="product.sudo().expiry_lot_date" ></span></li></t>
+                        <li style="font-size:13px;">Expiry: <t t-if="product.sudo().expiry_lot_date"><span t-esc="product.sudo().expiry_lot_date" ></span></t><t t-else="">N/A</t></li>
                         <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
-						<strong style="font-size:12px;">
-							In Stock
-							<t t-if="website.show_product_qty"><span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
-							</t>
-							<t t-foreach="product.sudo().packaging_ids" t-as="package">
-								<t t-if="package.qty != 1">
-								    <span style="font-size:12px;">Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
-								</t>
-							</t>
-						</strong>
-						<br/>
-						<b><span style="font-size:12px; text-align: center;">
-							<t t-foreach="product.sudo().packaging_ids" t-as="package">
-								<t t-if="package.qty != 1">
-								    <span style="font-size:12px; text-align: center;" >MIN: 
-								    <span style="font-size:12px; text-align: center;" t-esc='package.qty' /> | CASE: 
-								    <span style="font-size:12px; text-align: center;" t-esc='package.qty' /></span>
-								</t>
-							</t>
-						</span></b>
+			<li style="font-size:12px;">
+				In Stock
+				<t t-if="website.show_product_qty"><span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
+				</t>
+				<t t-foreach="product.sudo().packaging_ids" t-as="package">
+					<t t-if="package.qty != 1">
+					    <span style="font-size:12px;"> | Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+					</t>
+				</t>
+			</li>
+			<li style="font-size:12px; text-align: center;">
+				<t t-foreach="product.sudo().packaging_ids" t-as="package">
+					<t t-if="package.qty != 1">
+					    <span style="font-size:12px; text-align: center;" >MIN: 
+					    <span style="font-size:12px; text-align: center;" t-esc='package.qty' /> | CASE: 
+					    <span style="font-size:12px; text-align: center;" t-esc='package.qty' /></span>
+					</t>
+				</t>
+			</li>
                     </ol>
                 </t>
 
@@ -75,30 +74,29 @@
                     <ol>
                         <li style="font-size:13px;">SKU: <span t-esc="product.sudo().default_code"></span></li>
                         <li style="font-size:13px;">Barcode: <span t-esc="product.sudo().barcode"></span></li>
-                        <li style="font-size:13px;">UPC: <span t-esc="product.sudo().upc"></span></li>
+                        <li style="font-size:13px;">Case Barcode: <t t-foreach="product.sudo().packaging_ids" t-as="package"><span t-esc="package.barcode"></span></t></li>
 			<li style="font-size:13px;">Label: <span t-esc="product.sudo().bilingual_frenchlabel"></span></li>
-                        <t t-if="product.sudo().expiry_lot_date"><li style="font-size:13px;">Expiry: <span t-esc="product.sudo().expiry_lot_date" ></span></li></t>
+                        <li style="font-size:13px;">Expiry: <t t-if="product.sudo().expiry_lot_date"><span t-esc="product.sudo().expiry_lot_date" ></span></t><t t-else="">N/A</t></li>
                         <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
-						<strong style="font-size:12px;">
-							Only
-							<t t-if="website.show_left_product_qty"><span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
-							</t>
-							<t t-foreach="product.sudo().packaging_ids" t-as="package">
-								<t t-if="package.qty != 1">
-								    <span style="font-size:12px;">Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
-								</t>
-							</t>
-						</strong>	
-						<br/>					
-						<b><span style="font-size:14px; text-align: center;">
-							<t t-foreach="product.sudo().packaging_ids" t-as="package">
-								<t t-if="package.qty != 1">
-								    <span style="font-size:14px; text-align: center;" >MIN: 
-								    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /> | CASE: 
-								    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /></span>
-								</t>
-							</t>
-						</span></b>
+			<li style="font-size:12px;">
+				Only
+				<t t-if="website.show_left_product_qty"><span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
+				</t>
+				<t t-foreach="product.sudo().packaging_ids" t-as="package">
+					<t t-if="package.qty != 1">
+					    <span style="font-size:12px;"> | Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+					</t>
+				</t>
+			</li>						
+			<li style="font-size:14px; text-align: center;">
+				<t t-foreach="product.sudo().packaging_ids" t-as="package">
+					<t t-if="package.qty != 1">
+					    <span style="font-size:14px; text-align: center;" >MIN: 
+					    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /> | CASE: 
+					    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /></span>
+					</t>
+				</t>
+			</li>
                     </ol> 
                 </t>
 
@@ -111,15 +109,15 @@
                         <t t-if="product.sudo().expiry_lot_date"><li style="font-size:13px;">Expiry: <span t-esc="product.sudo().expiry_lot_date" ></span></li></t>
                         <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
 <!-- 						<br/> -->
-						<b><span style="font-size:14px; text-align: center;">
-							<t t-foreach="product.sudo().packaging_ids" t-as="package">
-								<t t-if="package.qty != 1">
-								    <span style="font-size:14px; text-align: center;" >MIN: 
-								    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /> | CASE: 
-								    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /></span>
-								</t>
-							</t>
-						</span></b>
+			<b><span style="font-size:14px; text-align: center;">
+				<t t-foreach="product.sudo().packaging_ids" t-as="package">
+					<t t-if="package.qty != 1">
+					    <span style="font-size:14px; text-align: center;" >MIN: 
+					    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /> | CASE: 
+					    <span style="font-size:14px; text-align: center;" t-esc='package.qty' /></span>
+					</t>
+				</t>
+			</span></b>
                     </ol>
                     <strong class="text text-danger" style="padding: 5px;">Out Of Stock</strong>
 			
@@ -129,14 +127,14 @@
     </template>
 
     <template id="sh_website_product_template_addcart_inherit" inherit_id="website_sale.products_add_to_cart" name="Product Add to Cart">
-        <xpath expr="//t[2]/a" position="attributes">
+        <xpath expr="//a[hasclass('btn','btn-default','btn-xs','a-submit')]" position="attributes">
             <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
             <attribute name="t-if">
                 (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
                 website.show_left_product_qty )
             </attribute>
         </xpath>
-        <xpath expr="//t[2]/a" position="attributes">
+        <xpath expr="//t[2]//a[hasclass('btn','btn-default','btn-xs')]" position="attributes">
             <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
             <attribute name="t-if">
                 (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
