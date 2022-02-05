@@ -18,29 +18,17 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     getcustomers: function (ev) {
 		var self= this;
         var search_string = $('#select_customer').val();
-//        alert(search_string);
-//        if(!search_string) return;
+        var options = "<option>Select Customer</option>"
         this._rpc({
             route: "/getcustomers",
             params: {
                 search: search_string,
             },
         }).then(function(data) {
-            var data_list= "<datalist id='select_customers'>";
-            //$('#select_customer').html(data);
-            var options = ""
             for (let i = 0; i < data.length; i++) {
                 options += "<option data-id="+data[i]['id']+">"+data[i]['name']+"</option>";
             };
-            var existing_data_list = $('#select_customers').html();
-            console.log("existing_data_list",existing_data_list);
-            if(!existing_data_list){
-                data_list+='"'+options+'"'+"</datalist>";
-                $('#select_customer').append(data_list);
-            }
-//            else{
-//                existing_data_list.html(options);
-//            }
+            $('#select_customers').html(options);
         });
     },
 
