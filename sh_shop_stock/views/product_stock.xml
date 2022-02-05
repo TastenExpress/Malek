@@ -54,7 +54,7 @@
 				</t>
 				<t t-foreach="product.sudo().packaging_ids" t-as="package">
 					<t t-if="package.qty != 1">
-					    <span style="font-size:12px;">Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+					    <span style="font-size:12px;"> | Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
 					</t>
 				</t>
 			</li>
@@ -84,7 +84,7 @@
 				</t>
 				<t t-foreach="product.sudo().packaging_ids" t-as="package">
 					<t t-if="package.qty != 1">
-					    <span style="font-size:12px;">Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+					    <span style="font-size:12px;"> | Case </span><span style="font-size:12px; text-align: center;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
 					</t>
 				</t>
 			</li>						
