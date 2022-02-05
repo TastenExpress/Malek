@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="categories_link11" name="Categories Link">
+        <div t-att-data-link-href="keep('/shop/category/' + slug(c), category=0)" class="custom-control custom-radio mb-1 d-inline-block">
+            <i t-if="children" t-attf-class="fa #{'fa-chevron-down' if c.id in category.parents_and_self.ids else 'fa-chevron-right'}"
+                t-attf-title="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}"
+                t-attf-aria-label="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}" role="img"/>
+
+            <input type="radio" style="pointer-events:none;" class="custom-control-input d-none" t-att-id="c.id" t-att-value="c.id" t-att-checked="'true' if c.id == category.id else None"/>
+            <label class="" t-att-for="c.id" t-field="c.name"/>
+        </div>
+    </template>
 
     <template id="product_checkout" name="checkout page" inherit_id="website_sale.cart" >
         <xpath expr="//t[@t-call='website_sale.cart_lines']" position="before" groups="base.group_user">
             <div class="offset-md-3 col-md-6" groups="base.group_user">
                   <div class="form-group form-inline">
                     <label for="select_customer">Order for:</label>
-                    <select name="select_customer" id="select_customer" style="width:100%;">
-                    </select>
+                    <input list="select_customers" name="select_customer" id="select_customer" style="width:100%;"/>
                   </div>
             </div>
         </xpath>
     </template>
+
+
+    <template id="inherit_categories_recursive_311" inherit_id="website_sale.option_collapse_categories_recursive" name="Category List Items Custom">
+        <xpath expr="//t[@t-call='website_sale.categorie_link']" position="attributes">
+            <attribute name="t-call">ecommerce_store.categories_link11</attribute>
+        </xpath>
+    </template>
+
+    <template id="inherit_categories_recursive_5" inherit_id="website_sale.products_categories" name="Category List Items Custom">
+        <xpath expr="//div[@id='wsale_products_categories_collapse']" position="replace">
+            <div class="collapse d-lg-block" id="wsale_products_categories_collapse">
+                <strong class="o_categories_collapse_title text-uppercase">Categories</strong>
+                <ul class="nav flex-column my-2">
+                    <form>
+                        <li class="nav-item">
+                            <div t-att-data-link-href="keep('/shop', category=0)" class="custom-control custom-radio mb-1 d-inline-block">
+                                <i t-if="children" t-attf-class="fa #{'fa-chevron-down' if c.id in category.parents_and_self.ids else 'fa-chevron-right'}"
+                                t-attf-title="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}"
+                                t-attf-aria-label="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}" role="img"/>
+
+                                <input type="radio" style="pointer-events:none;" class="custom-control-input o_not_editable" t-att-id="all_products" t-att-value="all_products" t-att-checked="'true' if not category else None"/>
+                                <label class="" t-att-for="all_products">All Products</label>
+                            </div>
+                        </li>
+                        <t t-foreach="categories" t-as="c">
+                            <t t-call="website_sale.option_collapse_categories_recursive" />
+                        </t>
+                    </form>
+                </ul>
+            </div>
+        </xpath>
+    </template>
+
+
 </odoo>

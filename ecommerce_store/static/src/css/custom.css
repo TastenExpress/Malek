@@ -1,0 +1,7 @@
+
+/*by zahid to make website full width*/
+@media(min-width: 1200px){
+    .container, .o_container_small {
+        max-width: 95% !important;
+    }
+}

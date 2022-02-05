@@ -7,12 +7,39 @@ from odoo.http import request
 class WebsiteSaleInherit(http.Controller):
 
     @http.route('/getcustomers', type='json', auth='public')
-    def _get_customers_json(self):
+    def _get_customers_json(self,**search):
         customer_dic=[]
-        customer = request.env['res.partner'].sudo().with_context({'res_partner_search_mode': 'customer'}).search(['&',('parent_id','=',False),('create_uid','=',request.env.user.id)])
+        if 'search' in search:
+            search_string = search.get('search')
+            obj_partner = request.env['res.partner'].sudo()
+            if search_string:
 
-        for rec in customer:
-            customer_dic.append({"id":rec.id,"name":rec.name})
+                customer = obj_partner.search(
+                    [
+                    ('parent_id','=',False),('create_uid','=',request.env.user.id),
+                     "|",('name','ilike',search_string),
+                     "|",('email','ilike',search_string),
+                     "|",('phone','ilike',search_string),
+                     "|",('mobile','ilike',search_string),
+                     "|",('street','ilike',search_string),
+                      ('street2','ilike',search_string)
+
+                     ])
+
+                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),
+                                                          "|",('function','=ilike','manager'),
+                                                          "&",('function','=ilike','accountant'),
+                                                           ('name', 'ilike', search_string)
+                                                          ])
+
+                for partner_id in manager_accountants:
+                    if partner_id.parent_id not in customer:
+                        customer+=partner_id.parent_id
+            else:
+                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)])
+
+            for rec in customer:
+                customer_dic.append({"id":rec.id,"name":rec.name})
         return customer_dic
 
     @http.route('/update_order_customer', type='json', auth='public')
