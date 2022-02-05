@@ -24,22 +24,25 @@ class WebsiteSaleInherit(http.Controller):
                      "|",('street','ilike',search_string),
                       ('street2','ilike',search_string)
 
-                     ])
+                     ],order = 'name')
 
-                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),
+                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),('name', 'ilike', search_string),
                                                           "|",('function','=ilike','manager'),
-                                                          "&",('function','=ilike','accountant'),
-                                                           ('name', 'ilike', search_string)
-                                                          ])
+                                                          ('function','=ilike','accountant'),
+
+                                                          ],order = 'name')
 
                 for partner_id in manager_accountants:
                     if partner_id.parent_id not in customer:
-                        customer+=partner_id.parent_id
+                        customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
+                        # customer+=partner_id.parent_id
             else:
-                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)])
+                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)],order = 'name')
 
             for rec in customer:
                 customer_dic.append({"id":rec.id,"name":rec.name})
+
+        print("customer_dic", customer_dic)
         return customer_dic
 
     @http.route('/update_order_customer', type='json', auth='public')
