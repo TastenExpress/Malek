@@ -63,7 +63,6 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
             },
         }).then(function (data) {
             $.unblockUI();
-            alert(data);
         }).then(function(){
             $.unblockUI();
         })
