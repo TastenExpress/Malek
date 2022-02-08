@@ -18,10 +18,17 @@
                       <label for="select_customer">Order for:</label>
                       <!--<select name="select_customer" id="select_customer">
                       </select>-->
-                      <input list="select_customers" name="select_customer" id="select_customer" style="width:100%;"/>
-                      <datalist id='select_customers'>
-                        <option>Select Customer</option>
-                      </datalist>
+                      <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
+                      <div class="dropdown">
+                            <input name="select_customer" placeholder="Select Customer"  id="select_customer" class='form-control' />
+                            <div id="select_customers" class="dropdown-content">
+
+                            </div>
+
+
+                        </div>
+
+
                   </div>
             </div>
         </xpath>

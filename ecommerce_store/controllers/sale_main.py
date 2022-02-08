@@ -34,8 +34,8 @@ class WebsiteSaleInherit(http.Controller):
 
                 for partner_id in manager_accountants:
                     if partner_id.parent_id not in customer:
-                        customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
-                        # customer+=partner_id.parent_id
+                        # customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
+                        customer+=partner_id.parent_id
             else:
                 customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)],order = 'name')
 
