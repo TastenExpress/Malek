@@ -9,7 +9,7 @@
     'website': 'https://www.odoo.com/app/ecommerce',
     'version': '1.1',
     'description': "",
-    'depends': ['base','website','product','stock_barcode','stock_picking_batch'],
+    'depends': ['base','web','website','product','stock_barcode','stock_picking_batch'],
     'data': [
         'security/ir.model.access.csv',
         'views/stock_picking_views.xml',
@@ -22,12 +22,17 @@
 
     'assets': {
         'web.assets_backend': [
+            'custom_barcode_operations/static/src/legacy/js/signature_dialog.js',
             'custom_barcode_operations/static/src/**/*.js',
             'custom_barcode_operations/static/src/**/*.scss',
         ],
         'web.assets_qweb': [
             'custom_barcode_operations/static/src/**/*.xml',
+            'custom_barcode_operations/static/src/legacy/xml/custom_barcode_header.xml',
         ],
+        'web._assets_common_styles': [
+            'custom_barcode_operations/static/src/legacy/scss/custom_barcode_header.scss',
+        ]
     },
     'license': 'LGPL-3',
 }

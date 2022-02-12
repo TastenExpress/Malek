@@ -49,11 +49,6 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
 
     onChangeCustomer:function(ev){
         var customer_id = $('#select_customer').attr('data-id');
-        alert('customer_id'+customer_id);
-        /*var customer_name = $('#select_customer').val();
-        var customer_id = $('#select_customers option').filter(function() {
-            return this.value == customer_name;
-        }).data('id');*/
         if(!customer_id) return;
         $.blockUI();
         this._rpc({

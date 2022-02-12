@@ -1,6 +1,7 @@
 /** @odoo-module **/
 import BarcodePickingModel from '@stock_barcode/models/barcode_picking_model';
 import { patch } from 'web.utils';
+import { _t } from 'web.core';
 import Session from 'web.session';
 
 
@@ -46,6 +47,16 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
 
     async _parseBarcode(barcode, filters) {
     debugger;
+    var scan_type = $('input[name="scan_barcode_custom"]:checked').val();
+//    var package_scanned = this.package_scanned;
+    var product_scanned = this.product_scanned;
+    var previous_scanned_prodcut = this.previous_scanned_prodcut;
+    if(scan_type == 'packages'){
+//        if(!package_scanned) this.package_scanned = false;
+        if(!product_scanned) this.product_scanned = false;
+        if(!previous_scanned_prodcut) this.previous_scanned_prodcut = false;
+    }
+    alert("scan_type: "+scan_type);
         const result = {
             barcode,
             match: false,
@@ -130,7 +141,8 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
                 result.match = true;
                 barcode = parsedBarcode.base_code;
             }
-        } catch (err) {
+        }
+        catch (err) {
             // The barcode can't be parsed but the error is caught to fallback
             // on the classic way to handle barcodes.
             console.log(`%cWarning: error about ${barcode}`, 'text-weight: bold;');
@@ -165,18 +177,59 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
                 result.match = true;
             }
         }
-
+        debugger;
         const product = recordByData.get('product.product');
-        if (product) {
+        if(product && scan_type === 'packages'){
+            this.product_scanned = true;
+            this.previous_scanned_prodcut = product;
+            result.stopped =  true;
+            result.error = "Product Verified!!! Please scan package now."
+            this.notification.add(
+                        _t(result.error),
+                        { type: 'success' }
+                    );
+        }
+        else if (product && scan_type === 'products'){
             result.product = product;
             result.match = true;
         }
+
+        debugger;
         const product_pkg = recordByData.get('product.packaging');
-        console.log('product_pkg',product_pkg);
-        if(!product && product_pkg){
-            result.product = await this.cache.getRecord('product.product', product_pkg.product_id);
-            result.quantity = product_pkg.qty;
-            result.match= true;
+        if(!product && product_pkg && scan_type === 'packages' ){
+            var pkg_product = await this.cache.getRecord('product.product', product_pkg.product_id);
+            if(!this.product_scanned){
+                result.stopped =  true;
+                result.error ="Validation Error!!! Please first scan product barcode and then package barcode."
+                this.notification.add(
+                    _t(result.error),
+                    { type: 'danger' }
+                );
+            }
+            else if(pkg_product.id != this.previous_scanned_prodcut.id){
+                result.stopped =  true;
+                result.error ="Validation Error!!! Scanned product and package are not same.";
+                this.notification.add(
+                    _t(result.error),
+                    { type: 'danger' }
+                );
+            }
+            else{
+                result.product = pkg_product;
+                result.quantity = product_pkg.qty;
+                result.match= true;
+
+//                this.product_scanned = false;
+//                this.previous_scanned_prodcut = false;
+            }
+        }
+        else if(!product && product_pkg && scan_type === 'products' ){
+            result.stopped =  true;
+            result.error ="Validation Error!!! Please select 'SCAN PACKAGES' option to scan packages.";
+            this.notification.add(
+                _t(result.error),
+                { type: 'danger' }
+            );
         }
         if (this.useExistingLots) {
             const lot = recordByData.get('stock.production.lot');
