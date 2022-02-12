@@ -56,7 +56,6 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
         if(!product_scanned) this.product_scanned = false;
         if(!previous_scanned_prodcut) this.previous_scanned_prodcut = false;
     }
-    alert("scan_type: "+scan_type);
         const result = {
             barcode,
             match: false,
