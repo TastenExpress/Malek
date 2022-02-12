@@ -127,14 +127,14 @@
     </template>
 
     <template id="sh_website_product_template_addcart_inherit" inherit_id="website_sale.products_add_to_cart" name="Product Add to Cart">
-        <xpath expr="//a[hasclass('btn','btn-default','btn-xs','a-submit')]" position="attributes">
+        <xpath expr="//t[2]/a" position="attributes">
             <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
             <attribute name="t-if">
                 (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
                 website.show_left_product_qty )
             </attribute>
         </xpath>
-        <xpath expr="//t[2]//a[hasclass('btn','btn-default','btn-xs')]" position="attributes">
+        <xpath expr="//t[2]/a" position="attributes">
             <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
             <attribute name="t-if">
                 (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
