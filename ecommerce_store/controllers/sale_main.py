@@ -1,18 +1,59 @@
 from odoo import addons
 from odoo import http
 from odoo.http import request
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 
+class WebsiteSaleInheritSale(WebsiteSale):
+
+    @http.route()
+    def cart_update_json(self, product_id, line_id=None, add_qty=None, set_qty=None, display=True, **kw):
+        product_packages = request.env["product.packaging"].sudo().search([('product_id','=',product_id)],order='qty')
+        if product_packages:
+            add_qty = product_packages[0].qty
+
+        res = super(WebsiteSaleInheritSale, self).cart_update_json(product_id, line_id, add_qty, set_qty, display, **kw)
+        return res
 
 
 class WebsiteSaleInherit(http.Controller):
 
     @http.route('/getcustomers', type='json', auth='public')
-    def _get_customers_json(self):
+    def _get_customers_json(self,**search):
         customer_dic=[]
-        customer = request.env['res.partner'].sudo().with_context({'res_partner_search_mode': 'customer'}).search(['&',('parent_id','=',False),('create_uid','=',request.env.user.id)])
+        if 'search' in search:
+            search_string = search.get('search')
+            obj_partner = request.env['res.partner'].sudo()
+            if search_string:
 
-        for rec in customer:
-            customer_dic.append({"id":rec.id,"name":rec.name})
+                customer = obj_partner.search(
+                    [
+                    ('parent_id','=',False),('create_uid','=',request.env.user.id),
+                     "|",('name','ilike',search_string),
+                     "|",('email','ilike',search_string),
+                     "|",('phone','ilike',search_string),
+                     "|",('mobile','ilike',search_string),
+                     "|",('street','ilike',search_string),
+                      ('street2','ilike',search_string)
+
+                     ],order = 'name')
+
+                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),('name', 'ilike', search_string),
+                                                          "|",('function','=ilike','manager'),
+                                                          ('function','=ilike','accountant'),
+
+                                                          ],order = 'name')
+
+                for partner_id in manager_accountants:
+                    if partner_id.parent_id not in customer:
+                        # customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
+                        customer+=partner_id.parent_id
+            else:
+                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)],order = 'name')
+
+            for rec in customer:
+                customer_dic.append({"id":rec.id,"name":rec.name})
+
+        print("customer_dic", customer_dic)
         return customer_dic
 
     @http.route('/update_order_customer', type='json', auth='public')
