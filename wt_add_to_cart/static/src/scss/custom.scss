@@ -1,0 +1,27 @@
+#notification_cart{
+	position: absolute;
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background: rgb(104, 181, 129);
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden; 
+    -webkit-box-shadow: 0 0 5px #9E9E9E;
+    -moz-box-shadow:    0 0 5px #9E9E9E;
+    box-shadow:         0 0 5px #9E9E9E;
+    -webkit-transform: translateY(-50px);
+    -webkit-animation: slideDown123 2s 0.0s 1 ease forwards;
+    -moz-transform:    translateY(-50px);
+    -moz-animation:    slideDown123 2s 0.0s 1 ease forwards;
+}
+@-webkit-keyframes slideDown123 {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0px); }
+}
+@-moz-keyframes slideDown123 {
+    0%, 100% { -moz-transform: translateY(-50px); }
+    10%, 90% { -moz-transform: translateY(0px); }
+}

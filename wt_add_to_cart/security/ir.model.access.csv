@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_product_template_line,access.product.template.line,model_product_template_line,base.group_user,1,1,1,1
+access_product_template_line_portal,access.product.template.line,model_product_template_line,base.group_portal,1,1,1,1
+access_product_template_line_public,access.product.template.line,model_product_template_line,base.group_public,1,1,1,1
+
+

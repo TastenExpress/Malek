@@ -19,9 +19,8 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     },
     select_customer:function(ev){
 
-        console.log('evvvvvvv',ev);
-        var id = ev.target.getAttribute('data-id');
-        var name = ev.target.innerHTML;
+        var id = ev.currentTarget.getAttribute('data-id');
+        var name = ev.currentTarget.getAttribute('data-name');
         this.toggle_dropdown();
         $('#select_customer').attr('data-id',id);
         $('#select_customer').val(name).trigger('change');
@@ -40,8 +39,9 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
                 search: search_string,
             },
         }).then(function(data) {
+            console.log('dataaaaaaaaaa',data);
             for (let i = 0; i < data.length; i++) {
-                options += "<a class='list_values' data-id="+data[i]['id']+">"+data[i]['name']+"</a>";
+                options += "<a style='border-bottom:1px solid;' class='list_values' data-name='"+data[i]['name']+"' data-id="+data[i]['id']+"><span>Name: </span><span>"+data[i]['name']+"<span></br><span>Phone: </span><span>"+data[i]['mobile']+"</span></br><span>Email: </span><span>"+data[i]['email']+"</span></a>";
             };
             $('#select_customers').html(options);
         });
