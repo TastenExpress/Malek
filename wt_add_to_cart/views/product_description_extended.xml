@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<odoo>
+		<template id="product" inherit_id="website_sale.product" name="Product Extended" track="1" priority="3000">
+			<xpath expr="//a[@id='add_to_cart']" position="replace">
+				<a role="button" id="add_to_cart_custom" class="btn btn-primary btn-lg mt16 js_check_product add_to_cart_json_cl d-block d-sm-inline-block" href="#"><i class="fa fa-shopping-cart"/> Add to Cart</a>
+			</xpath>
+		</template>
+	</odoo>

@@ -226,7 +226,7 @@
                             <!--Billing Address-->
 
                             <div class="form-group row">
-                                <label for="billing_name" class="ontrol-label col-sm-2">Billing Company Name *</label>
+                                <label for="billing_name" class="ontrol-label col-sm-2">Billing Name *</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="billing_name" t-att-value="billing_name" id="billing_name"
                                            class="form-control" required="required"/>
@@ -242,14 +242,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="billing_phone" class="ontrol-label col-sm-2">Billing Company Phone *</label>
+                                <label for="billing_phone" class="ontrol-label col-sm-2">Billing Phone *</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="billing_phone" t-att-value="billing_phone"
                                            id="billing_phone" class="form-control" required="required"/>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="billing_address" class="control-label col-sm-2">Billing Company Address *</label>
+                                <label for="billing_address" class="control-label col-sm-2">Billing Address *</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="billing_address" t-att-value="billing_address"
                                            id="billing_address" class="form-control" required="required"/>
