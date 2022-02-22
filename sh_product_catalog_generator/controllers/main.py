@@ -18,7 +18,7 @@ class DownloadCustomer(http.Controller):
             if kw['style']=='style_5':
                 datas['break_page']=4
             else:
-                datas['break_page']=5
+                datas['break_page']=2
 #                 datas['break_page_after_products']: False
             html = request.env.ref('sh_product_catalog_generator.product_catalog_report_action')._render(1, data=datas)
             
