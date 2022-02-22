@@ -19,7 +19,7 @@ class DownloadCustomer(http.Controller):
                 datas['break_page']=4
             else:
                 datas['break_page']=20
-                datas['break_page_after_products']: 1
+                datas['break_page_after_products']: 5
             html = request.env.ref('sh_product_catalog_generator.product_catalog_report_action')._render(1, data=datas)
             
             categ_list = []
