@@ -14,7 +14,7 @@ class ShProductTemplate(models.Model):
         related="company_id.multi_website_moq", string="MOQ for Multi Website?")
 
     def _computecase(self):
-        return self.packaging_ids[0].qty
+        self.sh_increment_qty = self.packaging_ids[0].qty
 
 class MOQwebsite(models.Model):
     _name = 'sh.moq.multi.website'
