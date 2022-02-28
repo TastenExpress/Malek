@@ -68,8 +68,11 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
         }).then(function (data) {
             $.unblockUI();
             alert("Customer Updated Successfully!!!");
+            $(".dropdown-content").css("display", "none");
+
         }).then(function(){
             $.unblockUI();
+
         })
 
     },
