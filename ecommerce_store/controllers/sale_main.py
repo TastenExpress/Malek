@@ -48,7 +48,7 @@ class WebsiteSaleInherit(http.Controller):
                         # customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
                         customer+=partner_id
             else:
-                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)],order = 'name')
+                customer = obj_partner.search([('create_uid', '=', request.env.user.id)],order = 'name')
 
             for rec in customer:
                 customer_dic.append({"id":rec.parent_id.id or rec.id,"name":rec.display_name,'email':rec.email or 'N/A','mobile':rec.mobile or rec.phone or 'N/A'})
