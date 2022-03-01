@@ -13,7 +13,9 @@ h6.o_wsale_products_item_title.mb-1{
 #products_grid .o_wsale_product_information_text .product_price.mb-1 {
     text-align: center;
 }
-
+#select_customers {
+    display: none;
+}
 #products_grid .o_wsale_product_information_text .product_price.mb-1 .oe_currency_value{
 
     font-weight:bold;

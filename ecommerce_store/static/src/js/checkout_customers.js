@@ -31,7 +31,15 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     },
     getcustomers: function (ev) {
 		var self= this;
+
         var search_string = $('#select_customer').val();
+
+        if(search_string){
+            $("#select_customers").css("display", "block");
+        }
+        else if(search_string==''){
+            $("#select_customers").css("display", "none");
+        }
         var options ="";
         this._rpc({
             route: "/getcustomers",
@@ -40,6 +48,7 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
             },
         }).then(function(data) {
             console.log('dataaaaaaaaaa',data);
+
             for (let i = 0; i < data.length; i++) {
                 options += "<a style='border-bottom:1px solid;' class='list_values' data-name='"+data[i]['name']+"' data-id="+data[i]['id']+"><span>Name: </span><span>"+data[i]['name']+"<span></br><span>Phone: </span><span>"+data[i]['mobile']+"</span></br><span>Email: </span><span>"+data[i]['email']+"</span></a>";
             };
@@ -59,8 +68,11 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
         }).then(function (data) {
             $.unblockUI();
             alert("Customer Updated Successfully!!!");
+            $(".dropdown-content").css("display", "none");
+
         }).then(function(){
             $.unblockUI();
+
         })
 
     },

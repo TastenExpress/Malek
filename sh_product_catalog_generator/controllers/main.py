@@ -14,12 +14,7 @@ class DownloadCustomer(http.Controller):
             for c in prodcat:
                 product_cats.append(c.id)
             pricelistobj=request.env['product.pricelist'].search([('id','=',int(kw['product_pricelist']))])
-            datas = {'id': 5, 'catalog_type': 'category', 'product_ids': [], 'category_ids': product_cats, 'price': True, 'pricelist_id':(pricelistobj.id,pricelistobj.name) , 'image': True, 'image_size': 'medium', 'description': True, 'product_link': True, 'style': kw['style'], 'int_ref': True, 'style_box': '2', 'break_page': False, 'break_page_after_products': 2,'on_hand':True, 'currency_id': (2, 'USD'), '__last_update': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597), 'display_name': 'product.catalog.wizard,5', 'create_uid': (2, 'Mitchell Admin'), 'create_date': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597), 'write_uid': (2, 'Mitchell Admin'), 'write_date': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597)}
-            if kw['style']=='style_5':
-                datas['break_page']=4
-#             else:
-#                 datas['break_page']=2
-#                 datas['break_page_after_products']: False
+            datas = {'id': 5, 'catalog_type': 'category', 'product_ids': [], 'category_ids': product_cats, 'price': True, 'pricelist_id':(pricelistobj.id,pricelistobj.name) , 'image': True, 'image_size': 'medium', 'description': True, 'product_link': True, 'style': kw['style'], 'int_ref': True, 'style_box': '2', 'break_page': False, 'break_page_after_products': 1,'on_hand':True, 'currency_id': (2, 'USD'), '__last_update': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597), 'display_name': 'product.catalog.wizard,5', 'create_uid': (2, 'Mitchell Admin'), 'create_date': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597), 'write_uid': (2, 'Mitchell Admin'), 'write_date': datetime.datetime(2021, 12, 16, 17, 43, 54, 460597)}
             html = request.env.ref('sh_product_catalog_generator.product_catalog_report_action')._render(1, data=datas)
             
             categ_list = []
