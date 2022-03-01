@@ -37,9 +37,12 @@ class WebsiteSaleInherit(http.Controller):
 
                      ],order = 'name')
                 print(customer)
-                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),('name', 'ilike', search_string),
-                                                          "|",('function','=ilike','manager'),
-                                                          ('function','=ilike','accountant'),
+#                 manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),('name', 'ilike', search_string),
+#                                                           "|",('function','=ilike','manager'),
+#                                                           ('function','=ilike','accountant'),
+
+#                                                           ],order = 'name')
+                manager_accountants = obj_partner.search([('create_uid','=',request.env.user.id),('name', 'ilike', search_string)
 
                                                           ],order = 'name')
 
