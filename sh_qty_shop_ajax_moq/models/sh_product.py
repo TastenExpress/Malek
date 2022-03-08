@@ -7,17 +7,17 @@ import math
 class ShProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    sh_increment_qty = fields.Char('Multiples of Quantity', default='1',compute='_computecase')
+    sh_increment_qty = fields.Char('Multiples of Quantity', default='1')#,compute='_computecase')
     multi_website_ids = fields.One2many(
         'sh.moq.multi.website', 'product_id', string="Website wise MOQ")
     multi_website_moq = fields.Boolean(
         related="company_id.multi_website_moq", string="MOQ for Multi Website?")
 
-    def _computecase(self):
-        if self.packaging_ids:
-            self.sh_increment_qty = self.packaging_ids[0].qty
-        else:
-            self.sh_increment_qty =1
+    # def _computecase(self):
+    #     if self.packaging_ids:
+    #         self.sh_increment_qty = self.packaging_ids[0].qty
+    #     else:
+    #         self.sh_increment_qty =1
 class MOQwebsite(models.Model):
     _name = 'sh.moq.multi.website'
     _description = 'MOQ Multi Website'
