@@ -15,7 +15,7 @@
                 </t>
             </t>
             <t t-else="">
-                <input type="text" class="form-control quantity" name="add_qty" id="qty_id" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_incresh_increment_qtyment_qty or 1" />
+                <input type="text" class="form-control quantity" name="add_qty" id="qty_id" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_increment_qty or 1" />
             </t>
 
 
