@@ -28,58 +28,58 @@ class ResPartner(models.Model):
 
 
 
-    @api.model
-    def create(self, vals):
+#     @api.model
+#     def create(self, vals):
      
      
-        if 'name' in vals:
-            partner_id = self.env['res.partner'].sudo().search([('name','=',vals['name']),('id','!=',5),('name','!=',''),('company_type','=','company')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error Name !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error Name !! Customer/Partner already exist in the database %s"""%(partner_id.name))
-        if 'email' in vals:
-            partner_id = self.env['res.partner'].sudo().search([('email','=',vals['email']),('id','!=',5),('email','!=','')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error Email !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error Email !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'name' in vals:
+#             partner_id = self.env['res.partner'].sudo().search([('name','=',vals['name']),('id','!=',5),('name','!=',''),('company_type','=','company')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error Name !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error Name !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'email' in vals:
+#             partner_id = self.env['res.partner'].sudo().search([('email','=',vals['email']),('id','!=',5),('email','!=','')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error Email !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error Email !! Customer/Partner already exist in the database %s"""%(partner_id.name))
 
-        if 'phone' in vals:
-            partner_id = self.env['res.partner'].sudo().search([('phone','=',vals['phone']),('id','!=',5),('phone','!=','')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error Phone !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error Phone !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'phone' in vals:
+#             partner_id = self.env['res.partner'].sudo().search([('phone','=',vals['phone']),('id','!=',5),('phone','!=','')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error Phone !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error Phone !! Customer/Partner already exist in the database %s"""%(partner_id.name))
 
-        if 'street' in vals:
-            partner_id = self.env['res.partner'].sudo().search([('street','=',vals['street']),('id','!=',5),('street','!=','')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error address !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error address !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'street' in vals:
+#             partner_id = self.env['res.partner'].sudo().search([('street','=',vals['street']),('id','!=',5),('street','!=','')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error address !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error address !! Customer/Partner already exist in the database %s"""%(partner_id.name))
 
-        if 'street2' in vals:         
-            partner_id = self.env['res.partner'].sudo().search([('street2','=',vals['street2']),('id','!=',5),('street2','!=','')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error address2 !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error address2 !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'street2' in vals:         
+#             partner_id = self.env['res.partner'].sudo().search([('street2','=',vals['street2']),('id','!=',5),('street2','!=','')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error address2 !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error address2 !! Customer/Partner already exist in the database %s"""%(partner_id.name))
 
-        if 'mobile' in vals:
-            partner_id = self.env['res.partner'].sudo().search([('mobile','=',vals['mobile']),('id','!=',5),('mobile','!=','')], limit=1)
-            if partner_id:
-                if partner_id.user_id:
-                    raise UserError("""Error Mobile !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
-                else:
-                    raise UserError("""Error Mobile !! Customer/Partner already exist in the database %s"""%(partner_id.name))
+#         if 'mobile' in vals:
+#             partner_id = self.env['res.partner'].sudo().search([('mobile','=',vals['mobile']),('id','!=',5),('mobile','!=','')], limit=1)
+#             if partner_id:
+#                 if partner_id.user_id:
+#                     raise UserError("""Error Mobile !! Customer/Partner already exist in the database and associated with sales-REP %s"""%(partner_id.user_id.name))
+#                 else:
+#                     raise UserError("""Error Mobile !! Customer/Partner already exist in the database %s"""%(partner_id.name))
 
-        return super(ResPartner, self).create(vals)
+#         return super(ResPartner, self).create(vals)
 
 
 
