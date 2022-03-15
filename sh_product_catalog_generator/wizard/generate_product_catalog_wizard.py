@@ -274,7 +274,7 @@ class GenerateProductCatalogWizard(models.TransientModel):
         # raise
         html = self.env.ref('sh_product_catalog_generator.product_catalog_report_action')._render(
             self.ids, data=datas)
-#         raise UserError(str(datas))
+        raise UserError(str(datas))
         categ_list = []
         if self.catalog_type == 'product':
             for product in self.product_ids:
