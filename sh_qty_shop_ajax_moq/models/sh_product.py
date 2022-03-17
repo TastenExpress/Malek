@@ -7,12 +7,28 @@ import math
 class ShProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    # compute=fields.Char('Multiples of Quantity',compute=_computecase)
-    sh_increment_qty = fields.Char('Multiples of Quantity', default='1')
-    multi_website_ids = fields.One2many(
-        'sh.moq.multi.website', 'product_id', string="Website wise MOQ")
-    multi_website_moq = fields.Boolean(
-        related="company_id.multi_website_moq", string="MOQ for Multi Website?")
+    def productloop(self):
+        products = self.env['product.template'].search([])
+        for p in products:
+            if p.packaging_ids:
+                p.sh_increment_qty = p.packaging_ids.qty
+                if len(p.packaging_ids.ids)>1:
+                    moq=p.env['sh.moq.multi.website'].create({
+                        'product_id':p.id,
+                        'website_id':p.website_id.id,
+                        'sh_increment_qty':str(int(p.packaging_ids[0].qty))
+                    })
+                else:
+                    moq = p.env['sh.moq.multi.website'].create({
+                        'product_id': p.id,
+                        'website_id': p.website_id.id,
+                        'sh_increment_qty': str(int(p.packaging_ids.qty))
+                    })
+                p.compute="1"
+            else:
+                self.sh_increment_qty =1
+                self.compute = "0"
+
 
     @api.onchange('packaging_ids')
     def productecase(self):
@@ -23,8 +39,18 @@ class ShProductTemplate(models.Model):
                 'website_id':self.website_id,
                 'sh_increment_qty':str(int(self.packaging_ids[0].qty))
             })
+            self.compute="1"
         else:
             self.sh_increment_qty =1
+            self.compute = "0"
+
+    compute=fields.Char('Multiples of Quantity',compute=productecase)
+    sh_increment_qty = fields.Char('Multiples of Quantity', default='1')
+    multi_website_ids = fields.One2many(
+        'sh.moq.multi.website', 'product_id', string="Website wise MOQ")
+    multi_website_moq = fields.Boolean(
+        related="company_id.multi_website_moq", string="MOQ for Multi Website?")
+
 
 class MOQwebsite(models.Model):
     _name = 'sh.moq.multi.website'
