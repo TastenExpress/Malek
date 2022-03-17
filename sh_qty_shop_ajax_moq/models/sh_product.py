@@ -11,23 +11,25 @@ class ShProductTemplate(models.Model):
         products = self.env['product.template'].search([])
         for p in products:
             if p.packaging_ids:
-                p.sh_increment_qty = p.packaging_ids.qty
+
                 if len(p.packaging_ids.ids)>1:
+                    p.sh_increment_qty = p.packaging_ids[0].qty
                     moq=p.env['sh.moq.multi.website'].create({
                         'product_id':p.id,
                         'website_id':p.website_id.id,
                         'sh_increment_qty':str(int(p.packaging_ids[0].qty))
                     })
+                    print("created: ",moq.sh_increment_qty)
                 else:
+                    p.sh_increment_qty = p.packaging_ids.qty
                     moq = p.env['sh.moq.multi.website'].create({
                         'product_id': p.id,
                         'website_id': p.website_id.id,
                         'sh_increment_qty': str(int(p.packaging_ids.qty))
                     })
-                p.compute="1"
+                    print("created: ", moq.sh_increment_qty)
             else:
                 self.sh_increment_qty =1
-                self.compute = "0"
 
 
     @api.onchange('packaging_ids')
