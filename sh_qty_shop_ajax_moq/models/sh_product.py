@@ -7,24 +7,24 @@ import math
 class ShProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    def _computecase(self):
-        if self.packaging_ids:
-            self.sh_increment_qty = self.packaging_ids[0].qty
-            moq=self.env['sh.moq.multi.website'].create({
-                'product_id':self.id,
-                'website_id':self.website_id,
-                'sh_increment_qty':self.packaging_ids[0].qty
-            })
-        else:
-            self.sh_increment_qty =1
-
-    compute=fields.Char('Multiples of Quantity',compute=_computecase)
+    # compute=fields.Char('Multiples of Quantity',compute=_computecase)
     sh_increment_qty = fields.Char('Multiples of Quantity', default='1')
     multi_website_ids = fields.One2many(
         'sh.moq.multi.website', 'product_id', string="Website wise MOQ")
     multi_website_moq = fields.Boolean(
         related="company_id.multi_website_moq", string="MOQ for Multi Website?")
 
+    @api.onchange('packaging_ids')
+    def productecase(self):
+        if self.packaging_ids:
+            self.sh_increment_qty = self.packaging_ids[0].qty
+            moq=self.env['sh.moq.multi.website'].create({
+                'product_id':self.id,
+                'website_id':self.website_id,
+                'sh_increment_qty':str(int(self.packaging_ids[0].qty))
+            })
+        else:
+            self.sh_increment_qty =1
 
 class MOQwebsite(models.Model):
     _name = 'sh.moq.multi.website'
