@@ -46,9 +46,9 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
                 productId = parseInt(productId, 10);
 
                 if (productId) {
-                    // console.log($el.closest("form"));
-                    // console.log($el.closest("form").find(".quantity").val() || 1.0);
-                    console.log($el.closest("form").find("setqty").val());
+                    console.log($el.closest("form"));
+                    // // console.log($el.closest("form").find(".quantity").val() || 1.0);
+                    // console.log($el.closest("form").find("setqty").val());
                     return self
                         ._rpc({
                             route: "/shop/cart/update_json",
@@ -61,7 +61,6 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
 
                         .then(function (data) {
                             var $q = $(".my_cart_quantity");
-                            console.log($(".my_cart_quantity").text(data.cart_quantity));
                             if (data.cart_quantity) {
                                 $q.parents("li:first").removeClass("d-none");
                                 $(".o_wsale_my_cart").show();
