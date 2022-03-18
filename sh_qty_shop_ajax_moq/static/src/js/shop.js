@@ -47,7 +47,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
 
                 if (productId) {
                     console.log($el.closest("form")['0']['1']['dataset']['min']);
-                    console.log($el.closest("form")[0][1]['dataset']['min']);
+                    var iniqty = $el.closest("form")[0][1]['dataset']['min'];
                     // // console.log($el.closest("form").find(".quantity").val() || 1.0);
                     // console.log($el.closest("form").find("setqty").val());
                     return self
@@ -56,7 +56,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
                             params: {
                                 product_id: productId,
                                 line_id: line_id,
-                                add_qty: $el.closest("form").find(".quantity").val() || 1.0,
+                                add_qty: $el.closest("form").find(".quantity").val()+iniqty || 1.0,
                             },
                         })
 
