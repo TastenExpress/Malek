@@ -56,7 +56,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
                             params: {
                                 product_id: productId,
                                 line_id: line_id,
-                                add_qty: $el.closest("form").find(".quantity").val()+iniqty || 1.0,
+                                add_qty: $el.closest("form").find(".quantity").val() || 1.0,
                             },
                         })
 

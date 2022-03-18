@@ -13,7 +13,7 @@ class ShProductTemplate(models.Model):
             if p.packaging_ids:
 
                 if len(p.packaging_ids.ids)>1:
-                    p.sh_increment_qty = p.packaging_ids[0].qty
+                    p.sh_increment_qty = str(int(p.packaging_ids[0].qty))
                     moq=p.env['sh.moq.multi.website'].create({
                         'product_id':p.id,
                         'website_id':p.website_id.id,
@@ -21,7 +21,7 @@ class ShProductTemplate(models.Model):
                     })
                     print("created: ",moq.sh_increment_qty)
                 else:
-                    p.sh_increment_qty = p.packaging_ids.qty
+                    p.sh_increment_qty = str(int(p.packaging_ids.qty))
                     moq = p.env['sh.moq.multi.website'].create({
                         'product_id': p.id,
                         'website_id': p.website_id.id,
