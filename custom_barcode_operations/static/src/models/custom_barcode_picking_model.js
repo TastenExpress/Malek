@@ -45,7 +45,6 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_mrp_subcontracting', {
     },
 
     async _parseBarcode(barcode, filters) {
-    debugger;
         const result = {
             barcode,
             match: false,

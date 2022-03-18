@@ -12,7 +12,6 @@ patch(LineComponent.prototype, 'custom_barcode_operations', {
     },
 
     addQuantity(quantity, ev) {
-    debugger;
             var l_comp = this;
 
 

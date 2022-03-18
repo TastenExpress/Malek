@@ -8,7 +8,7 @@ class WebsiteSaleInheritSale(WebsiteSale):
     @http.route()
     def cart_update_json(self, product_id, line_id=None, add_qty=None, set_qty=None, display=True, **kw):
         product_packages = request.env["product.packaging"].sudo().search([('product_id','=',product_id)],order='qty')
-        if product_packages:
+        if product_packages and add_qty:
             add_qty = product_packages[0].qty
 
         res = super(WebsiteSaleInheritSale, self).cart_update_json(product_id, line_id, add_qty, set_qty, display, **kw)
