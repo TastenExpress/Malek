@@ -72,6 +72,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
        
         _onClickAddCartJSON: function (ev) {
             ev.preventDefault();
+            console.log("_onClickAddCartJSON");
             var $link = $(ev.currentTarget);
 
             var $input = $link.closest(".input-group").find("input");
@@ -84,6 +85,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
             return false;
         },
         _onChangeAddQuantity: function (ev) {
+            console.log("_onChangeAddQuantity");
             ev.preventDefault();
             var $link = $(ev.currentTarget);
             var data = $link.closest('input[name="add_qty"]').val();
@@ -101,6 +103,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
         },
 
         _changeCartQuantity: function ($input, value, $dom_optional, line_id, productIDs) {
+            console.log("_changeCartQuantity");
             this._super.apply(this, arguments);
             var data = value;
             var default_value = $input.data("setqty");
