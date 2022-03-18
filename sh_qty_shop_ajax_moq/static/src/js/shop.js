@@ -48,7 +48,7 @@ odoo.define("sh_qty_shop_ajax_moq.website_sale", function (require) {
                 if (productId) {
                     console.log($el.closest("form"));
                     console.log($el.closest("form").find(".quantity").val() || 1.0);
-                    console.log($el.closest("form").find(".setqty").val());
+                    console.log($el.closest("form").find(".setqty"));
                     return self
                         ._rpc({
                             route: "/shop/cart/update_json",
