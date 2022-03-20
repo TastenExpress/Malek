@@ -33,6 +33,15 @@ publicWidget.registry.portalDetails =  publicWidget.Widget.extend({
     getcustomers: function (ev) {
 		var self= this;
         var search_string = $('#select_customer').val();
+	    
+    	
+        if(search_string){
+            $("#select_customers").css("display", "block");
+        }
+        else if(search_string==''){
+            $("#select_customers").css("display", "none");
+        }
+	    
         var options ="";
         this._rpc({
             route: "/getcustomers",
