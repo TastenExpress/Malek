@@ -30,7 +30,7 @@ class WebsiteSaleInherit(http.Controller):
 
                 customer = obj_partner.search(
                     [
-                    ('parent_id','=',False),('create_uid','=',request.env.user.id),
+                    ('parent_id','=',False),('user_id','=',request.env.user.id),
                      "|",('name','ilike',search_string),
                      "|",('email','ilike',search_string),
                      "|",('phone','ilike',search_string),
@@ -40,7 +40,7 @@ class WebsiteSaleInherit(http.Controller):
 
                      ],order = 'name')
 
-                manager_accountants = obj_partner.search([('parent_id','!=',False),('create_uid','=',request.env.user.id),('name', 'ilike', search_string),
+                manager_accountants = obj_partner.search([('parent_id','!=',False),('user_id','=',request.env.user.id),('name', 'ilike', search_string),
                                                           "|",('function','=ilike','manager'),
                                                           ('function','=ilike','accountant'),
 
@@ -51,7 +51,7 @@ class WebsiteSaleInherit(http.Controller):
                         # customer_dic.append({"id": partner_id.parent_id.id, "name": partner_id.parent_id.name+" (%s)"%partner_id.name})
                         customer+=partner_id.parent_id
             else:
-                customer = obj_partner.search([('parent_id', '=', False), ('create_uid', '=', request.env.user.id)],order = 'name')
+                customer = obj_partner.search([('parent_id', '=', False), ('user_id', '=', request.env.user.id)],order = 'name')
 
             for rec in customer:
                 customer_dic.append({"id":rec.id,"name":rec.name})
