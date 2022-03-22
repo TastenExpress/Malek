@@ -1,6 +1,7 @@
 # Part of Softhealer Technologies.
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError, ValidationError, Warning
 import math
 
 
@@ -13,7 +14,7 @@ class ShProductTemplate(models.Model):
             if p.packaging_ids:
 
                 if len(p.packaging_ids.ids)>1:
-                    p.sh_increment_qty = p.packaging_ids[0].qty
+                    p.sh_increment_qty = str(int(p.packaging_ids[0].qty))
                     moq=p.env['sh.moq.multi.website'].create({
                         'product_id':p.id,
                         'website_id':p.website_id.id,
@@ -21,7 +22,7 @@ class ShProductTemplate(models.Model):
                     })
                     print("created: ",moq.sh_increment_qty)
                 else:
-                    p.sh_increment_qty = p.packaging_ids.qty
+                    p.sh_increment_qty = str(int(p.packaging_ids.qty))
                     moq = p.env['sh.moq.multi.website'].create({
                         'product_id': p.id,
                         'website_id': p.website_id.id,
@@ -78,12 +79,15 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id', 'product_uom_qty')
     def onchange_pro_qty(self):
         if self:
+            raise UserError("AGAYA")
             for rec in self:
                 multi_by = int(rec.product_id.sh_increment_qty)
                 if rec.product_uom_qty < multi_by:
                     rec.product_uom_qty = multi_by
+                    rec.product_packaging_id = rec.product_id.packaging_ids[0].id
                 if rec.product_uom_qty > multi_by:
                     if multi_by != 0:
                         devi_value = rec.product_uom_qty/multi_by
                         ceil_value = math.ceil(devi_value)
                         rec.product_uom_qty = ceil_value * multi_by
+                        rec.product_packaging_id = rec.product_id.packaging_ids[0].id
