@@ -9,7 +9,7 @@ class DownloadCustomer(http.Controller):
     def download_catalog(self,**kw):
         if request.httprequest.method == 'POST':
             product_cats=[]
-            prodcat=request.env['product.category'].search([])
+            prodcat=request.env['product.category'].search([('id','!=',[2,1,3])])
 
             for c in prodcat:
                 product_cats.append(c.id)
