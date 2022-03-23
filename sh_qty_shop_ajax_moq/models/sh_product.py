@@ -36,7 +36,7 @@ class ShProductTemplate(models.Model):
     @api.onchange('packaging_ids')
     def productecase(self):
         if self.packaging_ids:
-            self.sh_increment_qty = self.packaging_ids[0].qty
+            self.sh_increment_qty = str(int(self.packaging_ids[0].qty))
             moq=self.env['sh.moq.multi.website'].create({
                 'product_id':self.id,
                 'website_id':self.website_id,
