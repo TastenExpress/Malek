@@ -14,7 +14,7 @@ class WebsiteSaleInheritSale(WebsiteSale):
             add_qty= None
             set_qty= 0
         else:
-            sdd_qty=int(add_qty)
+            sdd_qty=int(float(add_qty))
             
 #         raise UserError('product_id: '+str(product_id)+'line_id: '+str(line_id)+'add_qty: '+str(add_qty)+'set_qty: '+str(set_qty)+str(type(set_qty)))
         res = super(WebsiteSaleInheritSale, self).cart_update_json(product_id, line_id, add_qty, set_qty, display, **kw)
