@@ -79,7 +79,7 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id', 'product_uom_qty')
     def onchange_pro_qty(self):
         if self:
-            raise UserError("AGAYA")
+#             raise UserError("AGAYA")
             for rec in self:
                 multi_by = int(rec.product_id.sh_increment_qty)
                 if rec.product_uom_qty < multi_by:
